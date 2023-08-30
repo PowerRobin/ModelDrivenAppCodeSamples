@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta><meta>
+  </head>
+    <body style="display: flex; background-color: rgb(255, 255, 255); margin: 0px; overflow-wrap: break-word;" onfocusout="parent.setEmailRange();">
+        <iframe id="iframe" title="Canvas Page" style="width: 100%; height: 100%;" width="100%" src="" frameborder="0" allowfullscreen="true"></iframe>
+    
+ 
+    <script>
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+
+        //read record id (make sure to pass parameter in MDA-form)
+        const id = urlParams.get('id');
+        const wrvid = "F-0001";
+
+        //get URL of canvas app / page from table r2p_canvasintegration where r2p_intid is "F-0001"
+        fetch('https://' + window.location.hostname + '/api/data/v9.1/r2p_canvasintegrations?$filter=r2p_intid eq %27' + wrvid + '%27', {
+           method: 'GET',
+            headers: {
+            'Content-Type': 'application/json; charset=utf-8  ' 
+            }
+        }).then(response => response.json())
+        .then(async (wr) => {
+            //set IFrame source to app-url and add ID of record
+            var wrv = JSON.parse(wr.value[0]['r2p_url']);
+            document.getElementById('iframe').src = wrv.url + id;
+        });
+ 
+    </script>
+
+</body></html>
