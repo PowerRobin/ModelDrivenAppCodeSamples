@@ -4,7 +4,7 @@ You can use this code to embed a canvas app or canvas page into a Model Driven A
 
 Example: ![canvas page in MDA form](../ressources/embedcanvas.png)
 
-Link to Web Ressource: [Link](PowerRobin/ModelDrivenAppCodeSamples/EmbedCanvasApp/webressource.html)
+Link to Web Ressource: [Link](./webressource.html)
 
 
 ## Requirements
