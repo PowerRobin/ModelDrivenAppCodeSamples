@@ -11,7 +11,7 @@ Link to Web Ressource: [Link](./webressource.html)
 
 * HTML web ressource where you copy & paste the code
 * Model Driven App Form to display the web ressource (make sure to enable to pass the recod information as a parameter)
-* additional table to store the URL to the canvas app
+* environment variable where you store the id of the canvas page / app
 * if you use a Canvas Page you need share it via the Admin Center to give your users access to the page
 
 ## Limitations
