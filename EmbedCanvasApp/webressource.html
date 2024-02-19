@@ -11,12 +11,14 @@
         const queryString = window.location.search;
         const urlParams = new URLSearchParams(queryString);
 
-        //read record id (make sure to pass parameter in MDA-form)
+        //read record id (make sure to pass parameter in MDA-form, don't forget to pass parameter from the form - advanced setting when adding the html web ressource)
         const id = urlParams.get('id');
-        const wrvid = "F-0001";
+      
+        //get id of canvas app / page from environment variable
+        const envvariable = 'NAMEOFYOURENVVARIABLE';
 
-        //get URL of canvas app / page from table r2p_canvasintegration where r2p_intid is "F-0001"
-        fetch('https://' + window.location.hostname + '/api/data/v9.1/r2p_canvasintegrations?$filter=r2p_intid eq %27' + wrvid + '%27', {
+        //get id of canvas app / page from environment variable
+        fetch('https://' + window.location.hostname + "/api/data/v9.2/environmentvariablevalues?$select=environmentvariablevalueid,_environmentvariabledefinitionid_value,value&$expand=EnvironmentVariableDefinitionId($select=displayname,schemaname)&$filter=EnvironmentVariableDefinitionId/schemaname eq '" + envvariable + "'", {
            method: 'GET',
             headers: {
             'Content-Type': 'application/json; charset=utf-8  ' 
@@ -24,8 +26,8 @@
         }).then(response => response.json())
         .then(async (wr) => {
             //set IFrame source to app-url and add ID of record
-            var wrv = JSON.parse(wr.value[0]['r2p_url']);
-            document.getElementById('iframe').src = wrv.url + id;
+            var appid = wr.value[0]['value'];
+            document.getElementById('iframe').src = 'https://apps.powerapps.com/play/' + appid + '?recordId=' + id;
         });
  
     </script>
